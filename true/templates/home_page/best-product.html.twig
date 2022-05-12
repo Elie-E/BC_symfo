@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="{{ asset('styles/best-product.css') }}"> 
+
+<div class="container">
+	<div class="row my-5">
+		<div class="col-md-12">
+			<h2 id="carousel_title" class="best-product_title">Retrouvez nos Produits <b>Tendances</b></h2>
+
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+			<!-- Carousel indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>   
+
+			<!-- Wrapper for carousel items -->
+			<div class="carousel-inner">
+
+				<div class="item carousel-item active">   <!-- Carousel Items grouped by 4 -->
+					<div class="row">
+
+		{% for i in 0..3 %}
+
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="{{ asset('image/product/' ~ products[i].getProductImages()[0].urlImage) }}" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<a href="{{ path('product_show', {id: products[i].id}) }}" class="link-dark">
+										<h4>{{ products[i].getProductName() }}</h4>
+									</a>
+									<p class="item-price"><strike>{{ (products[3].getPriceHt() * products[3].getTva)*2 }}</strike> <span>{{ (products[3].getPriceHt() * products[3].getTva) }} €</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="{{ path('cart_add', {id: products[i].id}) }}" class="btn btn-primary">Add to Cart</a>
+								</div>						
+							</div>
+						</div>
+
+		{% endfor %}
+					</div>
+				</div>			<!-- End of 4 items group -->
+
+						
+				<div class="item carousel-item">		<!-- Carousel items by 4 -->
+					<div class="row">
+
+{% for i in 4..7 %}
+
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="{{ asset('image/product/' ~ products[i].getProductImages()[0].urlImage) }}" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<a href="{{ path('product_show', {id: products[i].id}) }}" class="link-dark">
+										<h4>{{ products[i].getProductName() }}</h4>
+									</a>
+									<p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="{{ path('cart_add', {id: products[i].id}) }}" class="btn btn-primary">Add to Cart</a>
+								</div>						
+							</div>
+						</div>
+
+{% endfor %}
+
+					</div>
+				</div>			<!-- End of 4 items group -->
+
+			</div>
+			<!-- Carousel controls -->
+			<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+		</div>
+	</div>
+</div>

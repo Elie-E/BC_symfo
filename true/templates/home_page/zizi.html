@@ -1,0 +1,35 @@
+<img src="snowmarcusclose.png" alt="">
+<div class="col-6"></div>
+
+<div>
+    <h1>Votre commande a été transmise et sera expédié bientôt</h1>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.productName }}</td>
+                <td>{{ item.product.priceHt }}</td>
+                <td> {{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right"> Total: </td>
+                    <td>{{ total }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="sidebar">
+     <div class="logo_content">
+       <div class="logo">
+         <div class="logo_name">Administration</div>
+       </div>
+       <i class='bx bx-menu' id="btn"></i>
+     </div>
+     <ul class="nav_list">
+       <li>
+          <i class='bx bx-search'></i>
+          <input type="text" placeholder="Search...">
+          <span class="tooltip">Recherche</span>
+       </li>
+       <li>
+        <a href="{{ path('home_page') }}" id="admin_button">
+         <i class='bx bx-home'></i>
+         <span class="links_name">Boutique</span>
+        </a>
+        <span class="tooltip">Boutique</span>
+      </li>
+       <li>
+         <a href="{{ path('category_index') }}" id="admin_button">
+          <i class='bx bx-category'></i>
+          <span class="links_name">Catégories</span>
+         </a>
+         <span class="tooltip">Catégories</span>
+       </li>
+       <li>
+        <a href="{{ path('product_index') }}" id="admin_button">
+            <i class='bx bx-basket'></i>
+         <span class="links_name">Produits</span>
+        </a>
+        <span class="tooltip">Produits</span>
+      </li>
+       <li>
+        <a href="{{ path('brand_index') }}" id="admin_button">
+            <i class='bx bx-label'></i>
+         <span class="links_name">Marques</span>
+        </a>
+        <span class="tooltip">Marques</span>
+      </li>
+      <li>
+        <a href="{{ path('client_index') }}" id="admin_button">
+         <i class='bx bx-user'></i>
+         <span class="links_name">Clients</span>
+        </a>
+        <span class="tooltip">Clients</span>
+      </li>
+      <li>
+        <a href="{{ path('order_index') }}" id="admin_button">
+         <i class='bx bx-cart-alt'></i>
+         <span class="links_name">Commandes</span>
+        </a>
+        <span class="tooltip">Commandes</span>
+      </li>
+     </ul>
+     <div class="content">
+       <div class="user">
+         <div class="user_details">
+           <img src="{{ asset('image/guinea-pig.jpg') }}" alt="">
+           <div class="name_job">
+             <div class="name">Elie E</div>
+             <div class="job">CEO</div>
+           </div>
+         </div>
+         {% if app.user %}
+         <a href="{{ path('app_logout') }}"><i class='bx bx-log-out' style="color:white;" id="log_out"></i></a>
+         {% endif %}
+       </div>
+     </div>
+   </div>
+   {# <div class="home_content">
+     <div class="text">Bonjour !</div>
+     <p>Choisisez une action dans le panneau de commande
+    </p>
+   </div> #}

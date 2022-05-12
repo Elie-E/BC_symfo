@@ -1,0 +1,84 @@
+.homepage_wrapper_square-layout{
+    display: grid;
+    grid-template-columns: 5vw auto auto 5vw;
+    grid-template-rows: 60vh 60vh;
+    grid-gap: 15px 15px;
+}
+@media screen and (max-width: 500px){
+    .homepage_wrapper_square-layout{
+        display: grid;
+        grid-template-columns: 5vw  auto 5vw;
+        grid-template-rows: 60vh 60vh 60vh 60vh;
+        grid-gap: 15px 15px;
+    }
+}
+
+.square {
+    background-position: center;
+    background-size: cover;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    position: relative;
+}
+
+.square-no {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background-image: url("../image/chient-en-laisse-grand.jpg");
+}
+.square-ne {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    background-image: url("../image/yellow-bird.jpg");
+}
+.square-se {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    background-image: url("../image/polatouche_snow.jpg");
+}
+.square-so {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    background-image: url("../image/outerwild-square.png");
+}
+@media screen and (max-width: 500px){
+    .square-no {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+    .square-ne {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+    }
+    .square-se {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    .square-so {
+        grid-column: 2 / 3;
+        grid-row: 4 / 5;
+    }
+}
+
+.square_button{
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+}
+.square .text-block{
+  position: absolute;
+  bottom: 20px;
+  left: 7%;
+  background-color: rgba(0, 0, 0, .4);
+  /* opacity: 0.5; */
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+}
+.square .text-block:hover {
+    background-color: rgb(145, 116, 116, 0.8);
+    color: black;
+    transition: 0.5s;
+}

@@ -1,0 +1,29 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="admin-page_content">
+        <h1>Categorie</h1>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ category.id }}</td>
+                </tr>
+                <tr>
+                    <th>Catégorie</th>
+                    <td>{{ category.categoryName }}</td>
+                </tr>
+                <tr>
+                    <th>Ordre affichage</th>
+                    <td>{{ category.displayOrder }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('category_index') }}">retour à la liste</a>
+        <a href="{{ path('category_edit', {'id': category.id}) }}">modifier</a>
+        {{ include('category/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

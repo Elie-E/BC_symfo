@@ -1,0 +1,66 @@
+{% extends 'base-site.html.twig' %} 
+
+{% block body %}
+    {{parent()}}
+
+{# // Si on a une catégorie sans parents ( càd une catégorie qui est seule ou parente d'autre sous catégorie ) : #}
+
+{% if category.category == NULL %}
+        <h1 class="text-center my-3"> {{ category.getCategoryName() }} </h1>
+
+{# <div class="row"> #}
+
+    {% for subcategory in category.categories %}     {# Boucle sur les sous catégorie  #}
+    <div class="row m-3 p-4 border">
+        <h2 class="pl-5 mb-3">{{ subcategory.categoryName }}</h2>     {# On affiche ses enfant (les sous catégorie ) #}
+
+        <div class="category-list_container">
+        {% for product in subcategory.products %}   {# Boucle sur les produit de la sous catégorie #}
+
+        {# <div class="col-2"> #}
+
+            <div class="category-list_card">  {# On affiche les produit  #}
+                <a href="{{ path('product_show', {id: product.id}) }}">
+                    <img src="{{ asset('image/product/' ~ product.getProductImages()[0].urlImage) }}" alt="Avatar" style="height: 17vh">
+                    <div class="category-list_container">
+                        <div class="category-list_card-title">
+                            <h4><b>{{ product.productName }}</b></h4>
+                        </div>
+                        <div class="category-list_card-infos">
+                            <p>{{ product.productDescription }}</p>
+                            <p>{{ product.priceHt * product.tva }}  €</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        {# </div>                  #}
+
+    {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+{# </div> #}
+
+
+{% else %}    {# Pour les catégories enfants on affiche dirrectement les produits : #}
+
+    <h1 class="text-center"> {{ category.getCategoryName() }} </h1>
+    <div class="row">
+         {% for product in category.products %}
+         <div class="col-4">
+         
+            {{ product.productName }}
+         </div>
+         {% endfor %}
+    </div>
+
+{% endif %}
+
+{% endblock %}
+
+    {# {% block footer %}
+       {{ parent() }}
+    {% endblock %} #}
+

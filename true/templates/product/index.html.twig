@@ -1,0 +1,58 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+    
+
+
+    <div class="admin-page_content">
+        <h1>Product index</h1>
+        <table class="table product-index_table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Product_name</th>
+                    <th>Product_description</th>
+                    <th>Price_ht</th>
+                    <th>Tva</th>
+                    <th>Image</th>
+                    <th>IsAvailable</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.productName }}</td>
+                    <td>{{ product.productDescription }}</td>
+                    <td>{{ product.priceHt }}</td>
+                    <td>{{ product.tva }}</td>
+                    <td>
+            {% if product.productImages %}
+                {% for image in product.productImages %}
+                    <img src="{{asset('/image/product/' ~ image.urlImage)}}" alt="{{image.altImage}}" style="width:65px">
+                {% endfor %}
+            {% else %}
+            {% endif %}
+                    </td>
+                    <td>{{ product.isAvailable ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                        <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('product_new') }}">Create new</a>
+    </div>
+{% endblock %}
+

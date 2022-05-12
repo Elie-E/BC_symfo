@@ -1,0 +1,55 @@
+.navbar_ee-bg {
+	background-color: rgb(240, 240, 240);
+}
+
+/* Changing the height of the navbar brand if preferable instead of modifying the size of the navbar. If not, I have problems
+with the collapsing part of the dropdown */
+
+.navbar_ee-size {
+	/* height: 13vh; */
+}
+.navbar-brand {
+	/* min-height: 12vh; */
+}
+
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+
+	.dropdown-menu li{
+		position: relative;
+	}
+	.dropdown-menu .submenu{ 
+		display: none;
+		position: absolute;
+		left:100%; top:-7px;
+	}
+	.dropdown-menu .submenu-left{ 
+		right:100%; left:auto;
+	}
+
+	.dropdown-menu > li:hover{ background-color: #f1f1f1 }
+	.dropdown-menu > li:hover > .submenu{
+		display: block;
+	}
+}	
+
+/* ============ small devices ============ */
+@media (max-width: 991px) {
+
+.dropdown-menu .dropdown-menu{
+		margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+	}
+}	
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+	position: fixed !important;
+	top: 0 !important;
+	z-index: 1 !important;
+	width: 100%;
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+	padding-top: 60px;
+  }

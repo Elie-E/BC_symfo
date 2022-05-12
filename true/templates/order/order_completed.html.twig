@@ -1,0 +1,43 @@
+{% extends 'base-site.html.twig' %}
+
+{% block title %}LaNîmeAlerie{% endblock %}
+
+    {% block body %}
+    {{parent()}}
+
+
+    <div class="container">
+    <h2 class="text-center">Votre commande a été transmise et sera expédié bientôt</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in summary %}
+            <tr>
+                <td>{{ item.product.productName }}</td>
+                <td>{{ item.buyingPrice }}</td>
+                <td> {{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right"> Total: </td>
+                    <td>{{ total }}  €</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div>
+            <button class="btn btn-secondary btn-sm">Revenir à la boutique</button>
+        </div>
+    </div>
+
+    {% endblock %}

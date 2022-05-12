@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+   Nom :  {{account.clientName}} </br>
+    Prénom : {{account.clientFirstName}} </br>
+
+    Adresse : {{ account.adresse.number }}  {{ account.adresse.line1 }} </br>  {{ account.adresse.code }}   {{ account.adresse.location }}
+
+    
+    <div>
+
+    {% for order in orders %}
+
+        Commande(s) :  {{ order.orderNumber}} </br>
+        Date :  {{ order.orderDate|date("m/d/Y") }}
+        Addresse : {{ order.adresse }}
+        Articles :
+        <ul>
+        {% for orderLog in order.orderLogs %}
+
+            <li>    {{ orderLog.product.productName }} </li>
+
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

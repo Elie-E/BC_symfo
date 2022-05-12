@@ -1,0 +1,39 @@
+{% extends 'base-site.html.twig' %} 
+
+{% block body %}
+    {{parent()}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="{{ asset('styles/best-product.css') }}"> 
+
+<div class="my-4">
+    <h1 class="text-center">{{ category.getCategoryName }}</h1>
+</div>
+<div class="my-4">
+    <a href="{{ path('product_list_lower', {id: products[0].category.id}) }}"><button class="btn btn-sm">Prix du - au +</button></a>
+    <a href="{{ path('product_list_higher', {'category': products[0].category.id}) }}"><button class="btn btn-sm">Prix du + au -</button></a>
+</div>
+<div class="ee_product_card-wrapper">
+        <div class="container">
+            <div class="row g-1">
+
+			{% for product in products %}
+                <div class="col-md-3">
+                    <div class="ee_product_card-card p-3">
+                        <a href="{{ path('product_show', {id: product.id}) }}" class="btn">
+							<div class="text-center"> <img src="{{ asset('image/product/' ~ product.getProductImages()[0].urlImage) }}" width="200"> </div>
+						</a>
+							<div class="product-details"> <span class="font-weight-bold d-block">{{ product.getProductName() }}</span> <span>{{ product.getPriceHt() * product.getTva() }}  €</span>
+								<div class="ee_product_card-buttons d-flex flex-row">
+									<div class="ee_product_card-cart"><i class="fa fa-shopping-cart"></i></div> <a href="{{ path('cart_add', {id: product.id}) }}" class="btn"><button class="btn btn-success ee_product_card-cart-button btn-block"><span class="ee_product_card-dot">1</span>Add to cart </button></a>
+								</div>
+								<div class="ee_product_card-weight"> <small>{{product.getBrand()}}</small> </div>
+							</div>
+                    </div>
+                </div>
+			{% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

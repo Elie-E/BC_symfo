@@ -1,0 +1,32 @@
+{% extends 'base-site.html.twig' %}
+
+{% block title %}LaNîmeAlerie{% endblock %}
+
+    {% block body %}
+    {{parent()}}
+
+    {% for value in filtres %}
+        <h3 class="search-result_title text-center">Résultat de la recherche pour : <strong>{{ value }}</strong></h3>
+    {% endfor %}
+
+        <div class="container search-result_container my-5">
+            <div class="row">
+                {% for productSearched in productsSearched %}
+                <div class="search-result_product-card col-md-3 p-4 mb-3">
+                    <a href="{{ path('product_show', {id: productSearched.id}) }}">
+                        <img src="{{ asset('image/product/' ~ productSearched.getProductImages()[0].urlImage) }}" alt="Avatar" style="width:100%">
+                        <div class="search-result_card-container">
+                            <h4><b>{{ productSearched.productName }}</b></h4>
+                            <p>{{ productSearched.descriptionSummary() }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if productsSearched is empty %}
+            <h3>Aucun résultat</h3>
+        {% endif %}
+
+    {% endblock %}

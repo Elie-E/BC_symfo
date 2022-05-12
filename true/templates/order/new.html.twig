@@ -1,0 +1,12 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}New Order{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="admin-page_content">
+        <h1>Create new Order</h1>
+        {{ include('order/_form.html.twig') }}
+        <a href="{{ path('order_index') }}">back to list</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base-site.html.twig' %}
+
+{% block title %}LaNîmeAlerie{% endblock %}
+
+    {% block body %}
+    {{parent()}}
+        {% include 'home_page/homepage-carousel.html.twig' %}
+
+        {% include 'home_page/sub-banner.html.twig' %}
+
+        {% include 'home_page/best-product.html.twig' %}
+
+        {% include 'home_page/square-layout.html.twig' %}
+
+    {% endblock %}
+
+
+
+
+

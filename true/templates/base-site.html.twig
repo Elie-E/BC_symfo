@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+    {% block body %}
+    {# {{parent()}} #}
+        {% include 'elements/header.html.twig' %}
+                {# {{ render(controller('App\\Controller\\HomePageController::displayNavigation'))}} #}
+
+
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'elements/footer.html.twig' %}
+    {% endblock %}
+
+
+    

@@ -1,0 +1,162 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+  <nav class="navbar navbar-expand-lg navbar-light navbar_ee-bg navbar_ee-size">
+    <div class="container-fluid navbar_ee-bg">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="main_nav">
+           
+       
+        <ul class="navbar-nav">
+          <li class="nav-item active"> <a class="nav-link active" aria-current="page" href="{{ path('home_page') }}">Accueil</a> </li>
+            <li class="nav-item dropdown">
+
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Boutique  </a>
+                <ul class="dropdown-menu">
+
+                     {% for category in categories %}  
+                      {% if category.category == NULL %}
+
+                       <li><a class="dropdown-item" href="{{ path('category_show', {id: category.id}) }}"> {{ category.getCategoryName() }} &raquo; </a>
+
+                        <ul class="submenu dropdown-menu">
+
+                       {% for children in category.categories %}
+
+                            <li><a class="dropdown-item" href="{{ path('product_list', {id: children.id}) }}">{{children.getCategoryName()}}</a></li>
+
+                        {% endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            {# TODO page contact, soit dans la nav soit en bas de toute le page principal  #}
+            {# TODO espace  #}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Espace  </a>
+                   <ul class="dropdown-menu">
+                       <li><a class="dropdown-item" href="{{ path('outerwild') }}"> Explorer la carte </a></li>
+                     <li><a class="dropdown-item" href="#"> Voyage &raquo; </a>
+                        <ul class="submenu dropdown-menu">
+                           <li><a class="dropdown-item" href="#">Mars</a></li>
+                           <li><a class="dropdown-item" href="#">Venus</a></li>
+                           <li><a class="dropdown-item" href="#">Jupiter</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#"> Qui somme nous </a></li>
+        </ul>
+
+
+           <div class="mx-auto">
+               <a class="navbar-brand" href="{{ path('home_page') }}">La Nime'alerie</a>
+           </div>
+
+             {# <div id="search-wrapper" class="search-wrapper">
+
+                 {{ form_start(searchForm)}}
+
+                 {{ form_end(searchForm)}}
+             </div>
+            <div id="search-icon" class="search-icon">
+                <i class="search-symbol fas fa-search" style="color: white;"></i>  
+            </div> #}
+
+              <script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
+
+
+      <div class="nav_search-box">
+          {{ form_start(searchForm)}}
+          {{ form_widget(searchForm.searchBar) }}
+          {{ form_end(searchForm)}}
+              <i class="nav_search fas fa-search" style="color: black;"></i> 
+      </div>
+
+{# ___________________________________________________ #}
+
+           <ul class="navbar-nav ms-auto">
+
+           
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item"> <a class="nav-link" href="{{ path('admin_page') }}"><strong>Administration</strong></a> </li>
+        {% endif %}
+
+                      {% if app.user %}
+               <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+
+               {# Ici je passe en paramètre l'id du compte associé que je récupère ensuite ds le accountController :  #}
+{# J'utilise la variable client car j'utilise le sensio framework dans accountController, sans le framework j'aurai utiliser la variable id   #}
+               <li class="nav-item"><a class="nav-link" href="{{ path('account',{'client':app.user.id}) }}"><i class="fa-solid fa-user"></i>Mon compte</a></li>
+
+            {% else %}
+               <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_login') }}"><i class="fa-solid fa-user"></i>Se connecter</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">S'enregistrer</a></li>
+             {% endif %}
+
+          {# Bouton panier modal  #}
+            <button type="button" class="btn btn-dark position-relative btn-sm" data-toggle="modal" data-target="#myModal" >
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ items|length }}
+              <span class="visually-hidden"></span>
+              </span>
+            </button>
+
+{# Modal Cart  #}
+          <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                  <h4>Mon panier</h4>
+                        <div class="modal-body">
+
+                        {% if items %}
+
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col-5">Article</th>
+                                <th scope="col-5">Quantité</th>
+                                <th scope="col-2">Modifier</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                        {% for item in items %}
+                              <tr>
+                                <td>{{ item.product.productName }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>
+                                  <a href="{{ path('cart_add', {id: item.product.id}) }}" class="btn btn-sm btn-info">+</a>
+                                  <a href="{{ path('remove_cart', {id: item.product.id}) }}" class="btn btn-sm btn-warning"><i class="fas fa-trash"></i></a>
+                                </td>
+                              </tr>
+                        {% endfor %}
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Total : {{total}}  €</td>
+                              </tr>
+                            </tbody>
+                            </table>
+                            {% else %}
+                            <h4>Votre panier est bien vide !</h4>
+                            {% endif %}
+                        </div>
+                    {% if items %}
+                    <div class="m-auto pb-2"><a href="{{ path('order_validation')}}"><button class="btn btn-secondary">Commander</button></a></div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+
+           </ul>      
+         </div> <!-- navbar-collapse.// -->
+        </div> <!-- container-fluid.// -->
+       </nav>
